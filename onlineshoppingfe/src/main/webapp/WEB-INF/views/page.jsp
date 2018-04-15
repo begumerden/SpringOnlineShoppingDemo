@@ -34,18 +34,23 @@
     <div class="content">
 
         <!-- Home content -->
-        <c:if test="${userClickHome == true }">
+        <c:if test="${homePageClicked}">
             <%@include file="home.jsp" %>
         </c:if>
 
         <!-- About content-->
-        <c:if test="${userClickAbout == true }">
+        <c:if test="${aboutPageClicked}">
             <%@include file="about.jsp" %>
         </c:if>
 
         <!-- Contact content-->
-        <c:if test="${userClickContact == true }">
+        <c:if test="${contactPageClicked}">
             <%@include file="contact.jsp" %>
+        </c:if>
+
+        <!-- Contact content-->
+        <c:if test="${allProductPageClicked or categoryProductsClicked}">
+            <%@include file="listProducts.jsp" %>
         </c:if>
     </div>
 

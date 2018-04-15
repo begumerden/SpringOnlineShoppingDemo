@@ -23,7 +23,7 @@
                 </li>
 
                 <li id="listProducts">
-                    <a href="${contextRoot}/listProducts">View Products</a>
+                    <a href="${contextRoot}/list/all/products">View Products</a>
                 </li>
 
                 <li id="manageProduct">

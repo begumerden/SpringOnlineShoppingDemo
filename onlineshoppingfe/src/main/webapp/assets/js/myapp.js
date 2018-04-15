@@ -1,5 +1,4 @@
 $(function () {
-    debugger;
     switch (menu) {
         case 'About Us':
             $('#about').addClass('active');
