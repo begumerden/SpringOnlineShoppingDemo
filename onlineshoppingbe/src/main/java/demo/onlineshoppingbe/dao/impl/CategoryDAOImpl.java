@@ -2,7 +2,11 @@ package demo.onlineshoppingbe.dao.impl;
 
 import demo.onlineshoppingbe.dto.Category;
 import demo.onlineshoppingbe.dao.CategoryDAO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,16 @@ import java.util.List;
  * @date: 15.4.2018
  */
 @Repository
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO {
+
+    private final SessionFactory sessionFactory;
+
+    @Autowired
+    public CategoryDAOImpl(SessionFactory session){
+        this.sessionFactory = session;
+    }
+
 
     //TODO: for testing purpose
     private static List<Category> categories;
@@ -43,7 +56,19 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public Category getById(int id) {
-        return categories.stream().filter( item -> item.getId() == id).findAny().orElse(null);
+        return categories.stream().filter(item -> item.getId() == id).findAny().orElse(null);
+    }
+
+    @Override
+    public boolean add(Category category) {
+
+        try {
+            sessionFactory.getCurrentSession().persist(category);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 
 
