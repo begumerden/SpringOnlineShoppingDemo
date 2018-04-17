@@ -6,3 +6,8 @@ CREATE TABLE Category (
 	is_active BOOLEAN,
 	CONSTRAINT pk_category_id PRIMARY KEY (id)
 );
+
+-- adding categories
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Laptop', 'This is description for Laptop category!', 'CAT_LAPTOP.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Mobile', 'This is description for Mobile category!', 'CAT_MOBILE.png', true);
+INSERT INTO category (name, description,image_url,is_active) VALUES ('Printer', 'This is description for Printer category!', 'CAT_PRINTER.png', true);

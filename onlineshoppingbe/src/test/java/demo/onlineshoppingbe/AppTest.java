@@ -1,4 +1,4 @@
-package com.spring.demo;
+package demo.onlineshoppingbe;
 
 import static org.junit.Assert.assertTrue;
 

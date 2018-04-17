@@ -14,7 +14,7 @@
 
     <!-- Scanning package where other controller can be found-->
     <context:component-scan base-package="demo.onlineshoppingfe.controller"></context:component-scan>
-    <context:component-scan base-package="demo.onlineshoppingbe.dao.impl"></context:component-scan>
+    <context:component-scan base-package="demo.onlineshoppingbe"></context:component-scan>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"></property>
