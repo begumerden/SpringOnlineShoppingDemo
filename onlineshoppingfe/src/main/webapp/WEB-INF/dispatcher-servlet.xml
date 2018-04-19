@@ -13,7 +13,7 @@
                 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- Scanning package where other controller can be found-->
-    <context:component-scan base-package="demo.onlineshoppingfe.controller"></context:component-scan>
+    <context:component-scan base-package="demo.onlineshoppingfe"></context:component-scan>
     <context:component-scan base-package="demo.onlineshoppingbe"></context:component-scan>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

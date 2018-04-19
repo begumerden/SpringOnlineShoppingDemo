@@ -1,5 +1,7 @@
 package demo.onlineshoppingbe.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -11,7 +13,7 @@ import java.util.UUID;
  * @author: b.erden
  * @date: 18.4.2018
  */
-
+@Data
 @Entity
 public class Product implements Serializable {
 
@@ -20,24 +22,39 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String code;
     @NotBlank(message = "Please enter the product name!")
+
     private String name;
     @NotBlank(message = "Please enter the brand name!")
+
     private String brand;
+
     @NotBlank(message = "Please enter the description!")
+    @JsonIgnore
     private String description;
+
     @Column(name = "unit_price")
     @Min(value = 1, message = "Please select at least one value!")
     private double unitPrice;
+
     private int quantity;
+
+    @JsonIgnore
     @Column(name = "is_active")
     private boolean active;
+
+    @JsonIgnore
     @Column(name = "category_id")
     private int categoryId;
+
+    @JsonIgnore
     @Column(name = "supplier_id")
     private int supplierId;
+
     private int purchases;
+
     private int views;
 
 

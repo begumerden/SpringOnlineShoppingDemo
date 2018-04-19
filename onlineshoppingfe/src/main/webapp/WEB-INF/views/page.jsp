@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Begum">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/cr-1.4.1/r-2.2.1/datatables.css"/>
     <link href="/resources/css/myapp.css" rel="stylesheet"> <!-- Custom CSS -->
     <link href="/resources/css/bootstrap-theme.css" rel="stylesheet"> <!-- Bootstrap Readable Theme -->
 
@@ -58,8 +59,9 @@
     <%@include file="./common/footer.jsp" %>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/cr-1.4.1/r-2.2.1/datatables.js"></script>
     <script src="/resources/js/myapp.js"></script>
 
 </div>

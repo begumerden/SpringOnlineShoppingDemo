@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>onlineshopping-fe Maven Webapp</name>
+    <name>onlineshopping-fe</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -18,7 +18,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.ee.version>7.0</java.ee.version>
-        <spring.version>4.3.13.RELEASE</spring.version>
+        <spring.version>4.3.15.RELEASE</spring.version>
     </properties>
 
     <dependencies>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>{java.ee.version}</version>
+            <version>${java.ee.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -54,6 +54,7 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

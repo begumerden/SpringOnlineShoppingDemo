@@ -1,4 +1,4 @@
-CREATE TABLE Category (
+CREATE TABLE category (
 	id IDENTITY,
 	name VARCHAR(50),
 	description VARCHAR(255),
@@ -7,12 +7,13 @@ CREATE TABLE Category (
 	CONSTRAINT pk_category_id PRIMARY KEY (id)
 );
 
--- adding categories
+
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Mobile', 'This is description for Mobile category!', 'CAT_MOBILE.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Laptop', 'This is description for Laptop category!', 'CAT_LAPTOP.png', true);
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Camera', 'This is description for Camera category!', 'CAT_CAMERA.png', true);
 
 
+-------
 CREATE TABLE user_detail (
 	id IDENTITY,
 	first_name VARCHAR(50),
@@ -25,7 +26,7 @@ CREATE TABLE user_detail (
 	CONSTRAINT pk_user_id PRIMARY KEY(id)
 );
 
--- adding users
+
 INSERT INTO user_detail
 (first_name, last_name, role, enabled, password, email, contact_number)
 VALUES ('Begum', 'Erden', 'ADMIN', true, 'admin', 'be@mail.com', '1111111111');
@@ -37,6 +38,7 @@ INSERT INTO user_detail
 VALUES ('Turkey', 'Izmir', 'SUPPLIER', true, '12345', 'turkey-izmir@mail.com', '3333333333');
 
 
+---------
 CREATE TABLE product (
 	id IDENTITY,
 	code VARCHAR(20),
@@ -55,13 +57,13 @@ CREATE TABLE product (
 	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),
 );
 
--- adding five products
+
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
 VALUES ('PRDCT000001', 'iPhone X', 'apple', 'One of the best smart phone available in the market right now!', 11490, 10, true, 1, 2, 0, 0 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
 VALUES ('PRDCT000002', 'Canon EOS M50', 'canon', 'A Digital SLR Camera by Canon!', 3000, 5, true, 3, 3, 0, 0 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
-VALUES ('PRDCT000003', 'iPhone 10', 'apple', 'This is one of the best smart phone available in the market right now!', 10000, 5, true, 1, 2, 0, 0 );
+VALUES ('PRDCT000003', 'iPhone 7s', 'apple', 'This is one of the best smart phone available in the market right now!', 10000, 5, true, 1, 2, 0, 0 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
 VALUES ('PRDCT000004', ' Macbook Pro', 'apple', 'This is one of the best laptops available in the market right now!', 54000, 3, true, 1, 2, 0, 0 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)

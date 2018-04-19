@@ -13,6 +13,6 @@
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern> <!-- Every url will go to over front controller-->
-
     </servlet-mapping>
+
 </web-app>
