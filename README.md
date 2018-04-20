@@ -1,2 +1,8 @@
-# spring-online-shopping
+# Online Shopping Demo with;
+  - Spring MVC 
+  - Hibernate
+  - Datatables
+  - Bootstrap
+  
+  
 
