@@ -1,7 +1,9 @@
 package demo.onlineshoppingfe.controller;
 
 import demo.onlineshoppingbe.dao.CategoryDAO;
+import demo.onlineshoppingbe.dao.ProductDAO;
 import demo.onlineshoppingbe.dto.Category;
+import demo.onlineshoppingbe.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,15 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class PageController {
 
     private final CategoryDAO categoryDAO;
+    private final ProductDAO productDAO;
 
     @Autowired
-    public PageController(CategoryDAO categoryDAO) {
+    public PageController(CategoryDAO categoryDAO, ProductDAO productDAO) {
         this.categoryDAO = categoryDAO;
+        this.productDAO = productDAO;
     }
 
     @RequestMapping(value = {"/", "/home", "/index"})
     public ModelAndView index() {
-        ModelAndView mv = new ModelAndView("page");
+        ModelAndView mv = new ModelAndView("page"); //-> masterPage
         mv.addObject("title", "Home");
         // adding categories
         mv.addObject("categories", categoryDAO.list());
@@ -70,6 +74,22 @@ public class PageController {
         mv.addObject("categories", categoryDAO.list());
         mv.addObject("category", category);
         mv.addObject("categoryProductsClicked", true);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/show/{id}/product")
+    public ModelAndView showProductById(@PathVariable int id) {
+        ModelAndView mv = new ModelAndView("page");
+        Product product = productDAO.get(id);
+
+        // updating view count
+        product.setViews(product.getViews() + 1);
+        productDAO.update(product);
+
+        mv.addObject("title", product.getName());
+        mv.addObject("product", product);
+        mv.addObject("showProductClicked", true);
 
         return mv;
     }

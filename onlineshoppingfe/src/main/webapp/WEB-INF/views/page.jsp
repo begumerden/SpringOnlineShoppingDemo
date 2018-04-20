@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<spring:url var="images" value="/resources/images" />
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -49,10 +51,16 @@
             <%@include file="contact.jsp" %>
         </c:if>
 
-        <!-- Contact content-->
+        <!-- List Products content-->
         <c:if test="${allProductPageClicked or categoryProductsClicked}">
             <%@include file="listProducts.jsp" %>
         </c:if>
+
+        <!-- Product Detail content-->
+        <c:if test="${showProductClicked }">
+            <%@include file="productDetail.jsp" %>
+        </c:if>
+
     </div>
 
     <!-- Footer -->
