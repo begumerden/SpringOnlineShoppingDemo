@@ -1,4 +1,4 @@
-package demo.onlineshoppingfe.controller;
+package demo.controller;
 
 import demo.onlineshoppingbe.dao.ProductDAO;
 import demo.onlineshoppingbe.dto.Product;
@@ -16,13 +16,13 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/json/data")
-public class JsonDataController {
+@RequestMapping("/datatable")
+public class DataTableController {
 
     private final ProductDAO productDAO;
 
     @Autowired
-    public JsonDataController(ProductDAO productDAO) {
+    public DataTableController(ProductDAO productDAO) {
         this.productDAO = productDAO;
     }
 

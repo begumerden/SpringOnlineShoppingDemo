@@ -1,5 +1,7 @@
-package demo.onlineshoppingfe.controller;
+package demo.controller;
 
+import demo.exception.CategoryNotFoundException;
+import demo.exception.ProductNotFoundException;
 import demo.onlineshoppingbe.dao.CategoryDAO;
 import demo.onlineshoppingbe.dao.ProductDAO;
 import demo.onlineshoppingbe.dto.Category;
@@ -31,7 +33,6 @@ public class PageController {
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("page"); //-> masterPage
         mv.addObject("title", "Home");
-        // adding categories
         mv.addObject("categories", categoryDAO.list());
         mv.addObject("homePageClicked", true);
 
@@ -70,6 +71,11 @@ public class PageController {
     public ModelAndView listCategoryProducts(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("page");
         Category category = categoryDAO.getById(id);
+        // If "handlerException" wasn't defined
+        // this exception one can be handled without throwing explicity
+        if(category == null){
+            throw new CategoryNotFoundException();
+        }
         mv.addObject("title", category.getName());
         mv.addObject("categories", categoryDAO.list());
         mv.addObject("category", category);
@@ -82,7 +88,9 @@ public class PageController {
     public ModelAndView showProductById(@PathVariable int id) {
         ModelAndView mv = new ModelAndView("page");
         Product product = productDAO.get(id);
-
+        if(product == null){
+            throw new ProductNotFoundException();
+        }
         // updating view count
         product.setViews(product.getViews() + 1);
         productDAO.update(product);

@@ -29,9 +29,9 @@ $(function () {
 
         var jsonUrl = '';
         if (window.categoryId == '') {
-            jsonUrl = window.contextRoot + '/json/data/all/products';
+            jsonUrl = window.contextRoot + '/datatable/all/products';
         } else {
-            jsonUrl = window.contextRoot + '/json/data/category/' + window.categoryId + '/products';
+            jsonUrl = window.contextRoot + '/datatable/category/' + window.categoryId + '/products';
         }
 
         $table.DataTable({
@@ -61,6 +61,12 @@ $(function () {
                     }
                 }, {
                     data: 'quantity',
+                    mRender: function (data, type, row) {
+                        if (data < 1) {
+                            return '<span style="color:red">Out of Stock!</span>';
+                        }
+                        return data;
+                    }
                 }, {
                     data: 'id',
                     bSortable: false,
@@ -70,9 +76,13 @@ $(function () {
                             + window.contextRoot + '/show/' + data
                             + '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &nbsp;';
 
-                        s += '<a href="' +
-                            window.contextRoot + '/card/add' + data
-                            + '/product " class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a> &nbsp;';
+                        if (row.quantity < 1) {
+                            s += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+                        } else {
+                            s += '<a href="'
+                                + window.contextRoot + '/cart/add/' + data
+                                + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+                        }
                         return s;
                     }
                 }
