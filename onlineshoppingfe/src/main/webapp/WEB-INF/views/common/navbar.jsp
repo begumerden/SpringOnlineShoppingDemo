@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${contextRoot}/home">Online Shopping</a>
+            <a class="navbar-brand" href="${contextRoot}/home">Online Shopping Demo</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,11 +23,11 @@
                 </li>
 
                 <li id="listProducts">
-                    <a href="${contextRoot}/list/all/products">View Products</a>
+                    <a href="${contextRoot}/list/all/products">Products</a>
                 </li>
 
-                <li id="manageProduct">
-                    <a href="${contextRoot}/manage">Manage Product</a>
+                <li id="manageProducts">
+                    <a href="${contextRoot}/manage/products">Product Management</a>
                 </li>
             </ul>
 

@@ -6,11 +6,11 @@ $(function () {
         case 'Contact Us':
             $('#contact').addClass('active');
             break;
-        case 'All Products':
+        case 'Products':
             $('#listProducts').addClass('active');
             break;
         case 'Product Management':
-            $('#manageProduct').addClass('active');
+            $('#manageProducts').addClass('active');
             break;
         default:
             if (menu == "Home")
@@ -88,6 +88,15 @@ $(function () {
                 }
             ]
         })
+    }
+
+
+    // after 5 sec alert msg will be removed
+    var alert = $('.alert');
+    if(alert.length){
+        setTimeout(function(){
+            alert.fadeOut('slow');
+        },5000);
     }
 
 });

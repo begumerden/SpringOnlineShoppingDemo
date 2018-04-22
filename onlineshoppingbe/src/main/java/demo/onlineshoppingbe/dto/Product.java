@@ -3,6 +3,7 @@ package demo.onlineshoppingbe.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -24,11 +25,11 @@ public class Product implements Serializable {
     private int id;
 
     private String code;
+
     @NotBlank(message = "Please enter the product name!")
-
     private String name;
-    @NotBlank(message = "Please enter the brand name!")
 
+    @NotBlank(message = "Please enter the brand name!")
     private String brand;
 
     @NotBlank(message = "Please enter the description!")
@@ -56,6 +57,9 @@ public class Product implements Serializable {
     private int purchases;
 
     private int views;
+
+    @Transient
+    private MultipartFile file;
 
 
     public Product() {

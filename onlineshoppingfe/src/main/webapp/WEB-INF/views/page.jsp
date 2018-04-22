@@ -40,8 +40,13 @@
         </c:if>
 
         <!-- Product Detail content-->
-        <c:if test="${showProductClicked }">
+        <c:if test="${showProductClicked}">
             <%@include file="productDetail.jsp" %>
+        </c:if>
+
+        <!-- Product Management content -->
+        <c:if test="${manageProductsClicked}">
+            <%@include file="./management/product.jsp" %>
         </c:if>
 
     </div>
