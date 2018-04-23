@@ -20,7 +20,7 @@
 
                         <ol class="breadcrumb">
                             <li><a href="${contextRoot}/home">Home</a></li>
-                            <li class="active">All products</li>
+                            <li class="active">Products</li>
                         </ol>
                     </c:if>
 

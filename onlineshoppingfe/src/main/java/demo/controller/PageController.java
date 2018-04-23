@@ -60,7 +60,7 @@ public class PageController {
     @RequestMapping(value = "/list/all/products")
     public ModelAndView listAllProducts() {
         ModelAndView mv = new ModelAndView("page");
-        mv.addObject("title", "All Products");
+        mv.addObject("title", "Products");
         mv.addObject("categories", categoryDAO.list());
         mv.addObject("allProductPageClicked", true);
 

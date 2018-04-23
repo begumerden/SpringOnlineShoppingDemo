@@ -42,7 +42,6 @@ public class Product implements Serializable {
 
     private int quantity;
 
-    @JsonIgnore
     @Column(name = "is_active")
     private boolean active;
 
