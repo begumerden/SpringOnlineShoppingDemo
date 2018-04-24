@@ -2,18 +2,17 @@
 
 <div class="container">
 
-    <div class="row">
-        <c:if test="${not empty message}">
-            <div class="col-xs-12">
-                <div class="alert alert-info alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert"></button>
-                        ${message}
-                </div>
+    <c:if test="${not empty message}">
+        <div class="col-xs-12">
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                    ${message}
             </div>
-        </c:if>
-    </div>
+        </div>
+    </c:if>
 
     <div class="row">
+
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -83,6 +82,15 @@
                             </div>
                         </div>
 
+                        <c:if test="${product.id == 0}">
+                            <br/>
+                            <div class="text-right">
+                                <button type="button" data-toggle="modal" data-target="#categoryModel"
+                                        class="btn btn-warning btn-xs">Add Category
+                                </button>
+                            </div>
+                        </c:if>
+
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-8">
                                 <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary"/>
@@ -104,12 +112,14 @@
 
     </div>
 
+    <%@include file="./category.jsp" %>
+
+    <hr/>
+    <h3>Available Products</h3>
+    <hr/>
+
     <div class="row">
 
-        <div class="col-xs-12">
-            <h3>Available Products</h3>
-            <hr/>
-        </div>
         <div class="col-xs-12">
 
             <table id="adminProductTbl" class="table table-condensed table-bordered">
@@ -144,4 +154,5 @@
         </div>
 
     </div>
+
 </div>

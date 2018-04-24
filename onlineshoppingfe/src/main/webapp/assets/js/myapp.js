@@ -170,12 +170,12 @@ $(function () {
                             if (confirmed) {
 
                                 var activationUrl = window.contextRoot + '/manage/product/' + value + '/activation';
-                                $.post(activationUrl, function(data){
-                                     bootbox.alert({
-                                         size: 'medium',
-                                         title:' Info',
-                                         message: data
-                                     })
+                                $.post(activationUrl, function (data) {
+                                    bootbox.alert({
+                                        size: 'medium',
+                                        title: ' Info',
+                                        message: data
+                                    })
                                 });
                             } else {
                                 checkbox.prop('checked', !checked);
@@ -198,6 +198,7 @@ $(function () {
             alert.fadeOut('slow');
         }, 5000);
     }
+    ;
 
 
     $('.switch input[type="checkbox"]').on('change', function () {
@@ -222,5 +223,42 @@ $(function () {
                 }
             }
         })
-    })
+    });
+
+    var categoryForm = $('#categoryForm');
+
+    if (categoryForm.length) {
+        categoryForm.validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    description: {
+                        required: true,
+                        minlength: 3
+                    }
+                },
+                messages: {
+                    name: {
+                        required: 'Please enter product name!',
+                        minlength: 'Please enter at least three characters'
+                    },
+                    description: {
+                        required: 'Please enter product name!',
+                        minlength: 'Please enter at least three characters'
+                    }
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    error.addClass("help-block");
+
+                    error.insertAfter(element);
+
+                    element.parents(".validate").addClass("has-feedback");
+                }
+            }
+        );
+    }
+
 });

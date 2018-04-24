@@ -4,6 +4,7 @@ import demo.onlineshoppingbe.dao.CategoryDAO;
 import demo.onlineshoppingbe.dao.ProductDAO;
 import demo.onlineshoppingbe.dto.Category;
 import demo.onlineshoppingbe.dto.Product;
+import demo.utils.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +51,12 @@ public class ManagementController {
 
         mv.addObject("product", product);
 
-        if (StringUtils.isNotBlank(operation) && operation.equals("product")) {
-            mv.addObject("message", "Product saved successfully.");
+        if (StringUtils.isNotBlank(operation)) {
+            if (operation.equals(Constants.Operations.PRODUCT)) {
+                mv.addObject("message", "Product saved successfully.");
+            } else if (operation.equals(Constants.Operations.CATEGORY)) {
+                mv.addObject("message", "Category saved successfully.");
+            }
         }
 
         return mv;
@@ -62,9 +67,15 @@ public class ManagementController {
         return categoryDAO.list();
     }
 
+    @ModelAttribute("category")
+    public Category getCategory() {
+        return new Category();
+    }
+
 
     @PostMapping(value = "/products")
-    public String saveProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String saveProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model
+            model, HttpServletRequest request) {
         logger.info(product.toString());
 
         if (bindingResult.hasErrors()) {
@@ -75,9 +86,9 @@ public class ManagementController {
             return "page";
         }
 
-        if(product.getId() == 0 ){
+        if (product.getId() == 0) {
             productDAO.add(product);
-        }else{
+        } else {
             productDAO.update(product);
         }
 
@@ -100,11 +111,10 @@ public class ManagementController {
         productDAO.update(product);
 
         return active ? "Deactivation Successful with product: " + product.getId() : "Activation Successful! with product: " + product.getId();
-
     }
 
     @GetMapping(value = "/{id}/product")
-    public ModelAndView showEditProducts(@PathVariable int id){
+    public ModelAndView showEditProducts(@PathVariable int id) {
         ModelAndView mv = new ModelAndView("page");
         mv.addObject("manageProductsClicked", true);
         mv.addObject("title", "Product Management");
@@ -114,5 +124,13 @@ public class ManagementController {
         mv.addObject("product", product);
 
         return mv;
+    }
+
+
+    @PostMapping(value = "/category")
+    public String addCategory(@ModelAttribute Category category) {
+        categoryDAO.add(category);
+
+        return "redirect:/manage/products?operation=category";
     }
 }
