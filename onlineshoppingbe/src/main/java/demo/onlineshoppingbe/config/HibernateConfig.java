@@ -16,8 +16,11 @@ import java.util.Properties;
  * @author: b.erden
  * @date: 15.4.2018
  */
+
+// This config can be also done via properties file
+
 @Configuration
-@ComponentScan(basePackages = {"demo.onlineshoppingbe.dto"})
+@ComponentScan(basePackages = {"demo.onlineshoppingbe"})
 @EnableTransactionManagement
 public class HibernateConfig {
 
@@ -57,7 +60,7 @@ public class HibernateConfig {
         properties.put("hibernate.dialect",DATABASE_DIALECT);
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
-        //properties.put("hibernate.hbm2ddl.auto", "create"); enable for test
+        properties.put("hibernate.hbm2ddl.auto", "update"); // generating tables / updates according to entities
         return properties;
     }
 }
