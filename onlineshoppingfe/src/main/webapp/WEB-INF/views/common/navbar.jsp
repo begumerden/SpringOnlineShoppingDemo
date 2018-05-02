@@ -33,10 +33,10 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li id="signup">
-                    <a href="#">Sign Up</a>
+                    <a href="${contextRoot}/register">Sign Up</a>
                 </li>
                 <li id="login">
-                    <a href="#">Login</a>
+                    <a href="${contextRoot}/login">Login</a>
                 </li>
                 <li class="dropdown">
                     <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" id="dropdownMenu1"

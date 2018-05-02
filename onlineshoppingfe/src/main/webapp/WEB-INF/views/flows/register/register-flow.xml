@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="user" class="demo.onlineshoppingbe.dto.User"></var>
+    <var name="billing" class="demo.onlineshoppingbe.dto.Address"></var>
+
+    <!-- Start -->
+    <view-state id="personal" view="flows/register/personal" model="user">
+        <transition on="billing" to="billing"></transition>
+    </view-state>
+
+    <view-state id="billing" view="flows/register/billing" model="billing">
+        <transition on="personal" to="personal"></transition>
+        <transition on="confirm" to="confirm"></transition>
+    </view-state>
+
+    <view-state id="confirm" view="flows/register/confirm">
+        <transition on="personal" to="personal"></transition>
+        <transition on="billing" to="billing"></transition>
+        <transition on="success" to="success"></transition>
+    </view-state>
+
+    <end-state id="home" view="externalRedirect:contextRelative:/"/>
+    <!-- from confirm we can go success -->
+    <end-state  id="success" view="flows/register/success" />
+
+    <global-transitions>
+        <transition on="home" to="home"></transition>
+    </global-transitions>
+</flow>
