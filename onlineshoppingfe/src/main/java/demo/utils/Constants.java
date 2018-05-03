@@ -12,4 +12,9 @@ public final class Constants {
         public static String PRODUCT = "product";
         public static String CATEGORY = "category";
     }
+
+    public static class Roles{
+        private Roles(){}
+        public static String USER = "USER";
+    }
 }

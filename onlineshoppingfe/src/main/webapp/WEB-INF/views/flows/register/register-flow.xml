@@ -7,27 +7,48 @@
     <var name="user" class="demo.onlineshoppingbe.dto.User"></var>
     <var name="billing" class="demo.onlineshoppingbe.dto.Address"></var>
 
+    <on-start>
+        <evaluate expression="registerHandler.init()" result="flowScope.registerModel"></evaluate>
+    </on-start>
+
     <!-- Start -->
     <view-state id="personal" view="flows/register/personal" model="user">
-        <transition on="billing" to="billing"></transition>
+        <transition on="billing" to="validate"></transition>
+        <on-exit>
+            <evaluate expression="registerHandler.addUser(flowScope.registerModel, user)"></evaluate>
+        </on-exit>
     </view-state>
 
     <view-state id="billing" view="flows/register/billing" model="billing">
-        <transition on="personal" to="personal"></transition>
+        <transition on="personal" to="personal" validate="false"></transition>
         <transition on="confirm" to="confirm"></transition>
+        <on-exit>
+            <evaluate expression="registerHandler.addBilling(flowScope.registerModel, billing)"></evaluate>
+        </on-exit>
     </view-state>
 
-    <view-state id="confirm" view="flows/register/confirm">
+    <view-state id="confirm" view="flows/register/confirm" model="flowScope.registerModel">
         <transition on="personal" to="personal"></transition>
         <transition on="billing" to="billing"></transition>
-        <transition on="success" to="success"></transition>
+        <transition on="submit" to="submit"></transition>
     </view-state>
+
+    <action-state id="submit">
+        <evaluate expression="registerHandler.saveAll(flowScope.registerModel)"></evaluate>
+        <transition on="success" to="success"></transition>
+    </action-state>
+
+    <action-state id="validate">
+        <evaluate expression="registerHandler.validateUser(user, messageContext)"></evaluate>
+        <transition on="success" to="billing"></transition>
+        <transition on="failure" to="personal"></transition>
+    </action-state>
 
     <end-state id="home" view="externalRedirect:contextRelative:/"/>
     <!-- from confirm we can go success -->
-    <end-state  id="success" view="flows/register/success" />
+    <end-state id="success" view="flows/register/success"/>
 
     <global-transitions>
-        <transition on="home" to="home"></transition>
+        <transition on="home" to="home" validate="false"></transition>
     </global-transitions>
 </flow>
