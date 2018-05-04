@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -73,7 +74,7 @@ public class PageController {
         Category category = categoryDAO.getById(id);
         // If "handlerException" wasn't defined
         // this exception one can be handled without throwing explicity
-        if(category == null){
+        if (category == null) {
             throw new CategoryNotFoundException();
         }
         mv.addObject("title", category.getName());
@@ -88,7 +89,7 @@ public class PageController {
     public ModelAndView showProductById(@PathVariable int id) {
         ModelAndView mv = new ModelAndView("page");
         Product product = productDAO.get(id);
-        if(product == null){
+        if (product == null) {
             throw new ProductNotFoundException();
         }
         // updating view count
@@ -98,6 +99,19 @@ public class PageController {
         mv.addObject("title", product.getName());
         mv.addObject("product", product);
         mv.addObject("showProductClicked", true);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/login")
+    public ModelAndView login(@RequestParam(name = "error", required = false) String error) {
+        ModelAndView mv = new ModelAndView("login");
+
+        if(error != null){
+            mv.addObject("message", "Invalid Username or Password");
+        }
+
+        mv.addObject("title", "Login");
 
         return mv;
     }

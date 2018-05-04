@@ -261,4 +261,40 @@ $(function () {
         );
     }
 
+
+    var loginForm = $('#loginForm');
+
+    if (loginForm.length) {
+        loginForm.validate({
+                rules: {
+                    username: {
+                        required: true,
+                        email:true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+                messages: {
+                    username: {
+                        required: 'Please enter email!',
+                    },
+                    password: {
+                        required: 'Please enter password!',
+                        minlength: 'Please enter at least 5 characters'
+                    }
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    error.addClass("help-block");
+
+                    error.insertAfter(element);
+
+                    element.parents(".validate").addClass("has-feedback");
+                }
+            }
+        );
+    }
+
 });
