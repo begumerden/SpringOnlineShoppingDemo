@@ -11,22 +11,28 @@
 
     <context:component-scan base-package="demo.onlineshoppingbe"></context:component-scan>
 
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+
     <http pattern="/resources/**" security="none"/>
     <http pattern="favicon.ico" security="none"/>
 
-
     <http>
-        <intercept-url pattern="/login" access="permitAll" />
-        <intercept-url pattern="/**" access="hasAuthority('USER')"/> <!-- more than one path xxx/yyy etc -->
+        <intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')"/>
+        <intercept-url pattern="/cart/" access="hasAuthority('USER')"/>
+        <intercept-url pattern="/**" access="permitAll"/> <!-- more than one path xxx/yyy etc -->
         <form-login login-page="/login"/>
-        <logout/>
+        <access-denied-handler error-page="/access-denied"></access-denied-handler>
     </http>
 
     <authentication-manager>
-        <authentication-provider><!-- dataSource is from HibernateConfig-->
+        <authentication-provider>
+            <password-encoder ref="passwordEncoder"></password-encoder> <!-- Automatically decodes -->
+            <!-- dataSource is from HibernateConfig-->
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="select email, password, enabled from user_detail where email = ?"
-                               authorities-by-username-query="select email, role from user_detail where email = ? "/>
+                               users-by-username-query="select email, password, enabled from user_info where email = ?"
+                               authorities-by-username-query="select email, role from user_info where email = ? "/>
 
         </authentication-provider>
     </authentication-manager>

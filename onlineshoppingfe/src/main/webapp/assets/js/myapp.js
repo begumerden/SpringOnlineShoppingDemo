@@ -77,9 +77,17 @@ $(function () {
                         if (row.quantity < 1) {
                             s += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
                         } else {
-                            s += '<a href="'
-                                + window.contextRoot + '/cart/add/' + data
-                                + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+
+                            if(userRole == 'ADMIN'){
+                                s += '<a href="'
+                                    + window.contextRoot + '/manage/' + data
+                                    + '/product" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
+                            }else{
+                                s += '<a href="'
+                                    + window.contextRoot + '/cart/add/' + data
+                                    + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+                            }
+
                         }
                         return s;
                     }
@@ -273,7 +281,7 @@ $(function () {
                     },
                     password: {
                         required: true,
-                        minlength: 5
+                        minlength: 3
                     }
                 },
                 messages: {
@@ -282,7 +290,7 @@ $(function () {
                     },
                     password: {
                         required: 'Please enter password!',
-                        minlength: 'Please enter at least 5 characters'
+                        minlength: 'Please enter at least 3 characters'
                     }
                 },
                 errorElement: "em",

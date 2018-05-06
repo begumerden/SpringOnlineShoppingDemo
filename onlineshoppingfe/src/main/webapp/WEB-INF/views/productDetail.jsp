@@ -36,11 +36,22 @@
             </h6>
 
 
-            <a href="${contextRoot}/cart/add/${product.id}/product"
-               class="btn btn-success ${product.quantity < 1 ? 'disabled ' : '' }">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                Add to Cart
-            </a>
+            <security:authorize access="hasAuthority('USER')">
+                <a href="${contextRoot}/cart/add/${product.id}/product"
+                   class="btn btn-success ${product.quantity < 1 ? 'disabled ' : '' }">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Add to Cart
+                </a>
+            </security:authorize>
+
+            <security:authorize access="hasAuthority('ADMIN')">
+                <a href="${contextRoot}/manage/${product.id}/product"
+                   class="btn btn-warning">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Edit
+                </a>
+            </security:authorize>
+
             <a href="${contextRoot}/list/all/products" class="btn btn-primary">
                 <span class="glyphicon glyphicon-arrow-left"></span>
                 Back

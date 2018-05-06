@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author: b.erden
  * @date: 27.4.2018
  */
-@Entity(name = "user_detail")
+@Entity (name = "user_info")
 @Data
 public class User implements Serializable {
 

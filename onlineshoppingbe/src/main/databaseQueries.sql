@@ -14,8 +14,8 @@ INSERT INTO category (name, description,image_url,is_active) VALUES ('Camera', '
 
 
 -------
-CREATE TABLE user (
-	id IDENTITY,
+CREATE TABLE user_info (
+	id IDENTITY AUTO_INCREMENT,
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
 	role VARCHAR(50),
@@ -27,15 +27,18 @@ CREATE TABLE user (
 );
 
 
-INSERT INTO user_detail
+INSERT INTO user_info
 (first_name, last_name, role, enabled, password, email, contact_number)
-VALUES ('Begum', 'Erden', 'ADMIN', true, 'admin', 'be@mail.com', '1111111111');
-INSERT INTO user_detail
+VALUES ('Begum', 'xx', 'ADMIN', true, '$2b$10$EVT17TCFC87hfxHXSNbVIeDSbh4odUiJzB3T1oA3wCYg2tN1bok3y', 'be@mail.com', '1111111111');
+INSERT INTO user_info  /*psw:user*/
 (first_name, last_name, role, enabled, password, email, contact_number)
-VALUES ('Turkey', 'Istanbul', 'SUPPLIER', true, '12345', 'turkey_istanbul@mail.com', '2222222222');
-INSERT INTO user_detail
+VALUES ('User', '', 'USER', true, '$2y$10$deuCqyNa.0.A.JzN4pNbs.eDvE6sA1hms4ZFyFzUjScsM/b5Zjole', 'user@mail.com', '1111111111');
+INSERT INTO user_info /*psw:istanbul*/
 (first_name, last_name, role, enabled, password, email, contact_number)
-VALUES ('Turkey', 'Izmir', 'SUPPLIER', true, '12345', 'turkey-izmir@mail.com', '3333333333');
+VALUES ('Turkey', 'Istanbul', 'SUPPLIER', true, '$2y$10$K6tOngf6NQaTdBti0bYdBurz5eXjr1.hSnVgKKpe7.gv7JA5AYY9W', 'turkey_istanbul@mail.com', '2222222222');
+INSERT INTO user_info
+(first_name, last_name, role, enabled, password, email, contact_number)
+VALUES ('Turkey', 'Izmir', 'SUPPLIER', true, '$2y$10$AgyaP772inlk3JFOyWiMT.6GkZxYYD/dZsDYoV/ROexKrpebedqcu', 'turkey-izmir@mail.com', '3333333333');
 
 
 ---------
@@ -54,7 +57,7 @@ CREATE TABLE product (
 	views INT DEFAULT 0,
 	CONSTRAINT pk_product_id PRIMARY KEY (id),
  	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
-	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),
+	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user(id),
 );
 
 
@@ -83,7 +86,7 @@ CREATE TABLE address (
 	postal_code VARCHAR(10),
 	is_billing BOOLEAN,
 	is_shipping BOOLEAN,
-	CONSTRAINT fk_address_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT fk_address_user_id FOREIGN KEY (user_id ) REFERENCES user_info (id),
 	CONSTRAINT pk_address_id PRIMARY KEY (id)
 );
 
@@ -95,6 +98,6 @@ CREATE TABLE cart (
 	user_id int,
 	grand_total DECIMAL(10,2),
 	cart_lines int,
-	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES user_detail (id),
+	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES user_info (id),
 	CONSTRAINT pk_cart_id PRIMARY KEY (id)
 );

@@ -45,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
     public User findUserByEmail(String email) {
         checkArgument(StringUtils.isNotBlank(email));
 
-        String sql = "FROM user_detail WHERE email = :email";
+        String sql = "FROM user_info WHERE email = :email";
 
         try {
             return (User) sessionFactory.getCurrentSession()

@@ -9,6 +9,7 @@ import demo.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -20,10 +21,12 @@ import org.springframework.stereotype.Component;
 public class RegisterHandler {
 
     private final UserDAO userDAO;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public RegisterHandler(UserDAO userDAO) {
+    public RegisterHandler(UserDAO userDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDAO = userDAO;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public RegisterModel init() {
@@ -47,6 +50,7 @@ public class RegisterHandler {
             cart.setUser(user);
             user.setCart(cart);
         }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDAO.addUser(user);
 
         Address billing = model.getBilling();
@@ -60,8 +64,8 @@ public class RegisterHandler {
     public String validateUser(User user, MessageContext messageContext) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             messageContext.addMessage(new MessageBuilder().error()
-                                                          .source("confirmPassword")
-                                                          .defaultText("Passwords don't match!").build());
+                    .source("confirmPassword")
+                    .defaultText("Passwords don't match!").build());
             return "failure";
         }
 
@@ -69,9 +73,9 @@ public class RegisterHandler {
         User userByEmail = userDAO.findUserByEmail(user.getEmail());
         if (userByEmail != null) {
             messageContext.addMessage(new MessageBuilder().error()
-                                                          .source("email")
-                                                          .defaultText("Email is already used! Please choose another email")
-                                                          .build());
+                    .source("email")
+                    .defaultText("Email is already used! Please choose another email")
+                    .build());
             return "failure";
         }
 
