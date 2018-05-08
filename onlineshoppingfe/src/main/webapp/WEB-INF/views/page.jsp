@@ -49,6 +49,11 @@
             <%@include file="./management/product.jsp" %>
         </c:if>
 
+        <!-- Cart content -->
+        <c:if test="${showCartClicked}">
+            <%@include file="./cart.jsp" %>
+        </c:if>
+
     </div>
 
     <!-- Footer -->

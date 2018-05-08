@@ -57,7 +57,7 @@ CREATE TABLE product (
 	views INT DEFAULT 0,
 	CONSTRAINT pk_product_id PRIMARY KEY (id),
  	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
-	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user(id),
+	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_info(id),
 );
 
 
@@ -100,4 +100,18 @@ CREATE TABLE cart (
 	cart_lines int,
 	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES user_info (id),
 	CONSTRAINT pk_cart_id PRIMARY KEY (id)
+);
+
+
+-------------------
+CREATE TABLE cart_line (
+	id IDENTITY,
+	cart_id int,
+	total DECIMAL(10,2),
+	product_id int,
+	product_count int,
+	buying_price DECIMAL(10,2),
+	is_available boolean,
+	CONSTRAINT fk_cartline_product_id FOREIGN KEY (product_id) REFERENCES product (id),
+	CONSTRAINT pk_cartline_id PRIMARY KEY (id)
 );

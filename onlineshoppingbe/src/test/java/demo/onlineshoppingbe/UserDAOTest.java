@@ -15,8 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
@@ -77,20 +75,6 @@ public class UserDAOTest {
         User userByEmail = userDAO.findUserByEmail("testy@testmail.com");
 
         assertNotNull(userByEmail);
-    }
-
-    @Test
-    public void update_cart_should_successful() {
-        user.setCart(new Cart());
-        userDAO.addUser(user);
-
-        User userByEmail = userDAO.findUserByEmail("testy@testmail.com");
-
-        Cart cart = userByEmail.getCart();
-        cart.setGrandTotal(1000);
-
-        assertTrue(userDAO.updateCart(cart));
-        assertTrue(userByEmail.getCart().getGrandTotal() == 1000);
     }
 
     @Test

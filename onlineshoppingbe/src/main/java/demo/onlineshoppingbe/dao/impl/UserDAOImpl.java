@@ -2,7 +2,6 @@ package demo.onlineshoppingbe.dao.impl;
 
 import demo.onlineshoppingbe.dao.UserDAO;
 import demo.onlineshoppingbe.dto.Address;
-import demo.onlineshoppingbe.dto.Cart;
 import demo.onlineshoppingbe.dto.User;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SessionFactory;
@@ -86,17 +85,6 @@ public class UserDAOImpl implements UserDAO {
         } catch (Exception e) {
             logger.error("Error", e);
             throw e;
-        }
-    }
-
-    @Override
-    public boolean updateCart(Cart cart) {
-        try {
-            sessionFactory.getCurrentSession().update(cart);
-            return true;
-        } catch (Exception e) {
-            logger.error("Error occurred", e);
-            return false;
         }
     }
 

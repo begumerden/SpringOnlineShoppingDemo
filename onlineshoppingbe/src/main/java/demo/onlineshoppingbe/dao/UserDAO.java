@@ -1,7 +1,6 @@
 package demo.onlineshoppingbe.dao;
 
 import demo.onlineshoppingbe.dto.Address;
-import demo.onlineshoppingbe.dto.Cart;
 import demo.onlineshoppingbe.dto.User;
 
 import java.util.List;
@@ -19,7 +18,5 @@ public interface UserDAO {
     boolean addAddress(Address address);
     Address getBillingAddress(int userId);
     List<Address> listShippingAddressesByUserId(int userId);
-
-    boolean updateCart(Cart cart);
 
 }

@@ -45,6 +45,6 @@ public class User implements Serializable {
     @Transient
     private String confirmPassword;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Cart cart;
 }

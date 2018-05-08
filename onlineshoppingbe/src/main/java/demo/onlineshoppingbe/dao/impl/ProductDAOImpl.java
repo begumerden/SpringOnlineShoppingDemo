@@ -3,6 +3,7 @@ package demo.onlineshoppingbe.dao.impl;
 import demo.onlineshoppingbe.dao.ProductDAO;
 import demo.onlineshoppingbe.dto.Product;
 import org.hibernate.SessionFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 @Transactional
 @Repository
 public class ProductDAOImpl implements ProductDAO {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ProductDAOImpl.class);
 
     private final SessionFactory sessionFactory;
 
@@ -30,7 +32,7 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             return sessionFactory.getCurrentSession().get(Product.class, productId);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error occurred", e);
         }
         return null;
     }
@@ -49,7 +51,7 @@ public class ProductDAOImpl implements ProductDAO {
             sessionFactory.getCurrentSession().persist(product);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e.getStackTrace());
         }
         return false;
     }
@@ -60,7 +62,7 @@ public class ProductDAOImpl implements ProductDAO {
             sessionFactory.getCurrentSession().update(product);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error occurred", e);
         }
         return false;
     }
