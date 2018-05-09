@@ -190,4 +190,12 @@ input:checked + .slider:before {
         display: block;
     }
 
+    .cartImg {
+        width: 100px;
+        height: 100px;
+    }
+
+    .unavailable {
+        color: red;
+    }
 }

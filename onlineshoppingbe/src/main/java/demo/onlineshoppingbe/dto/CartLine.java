@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @created 07/05/2018
  */
 
-@Entity
+@Entity (name = "cart_line")
 @Data
 public class CartLine implements Serializable {
 

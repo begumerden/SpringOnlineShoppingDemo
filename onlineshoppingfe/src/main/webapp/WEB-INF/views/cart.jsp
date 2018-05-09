@@ -1,5 +1,13 @@
 <div class="container">
 
+    <c:if test="${not empty message}">
+
+        <div class="alert alert-info">
+            <h3 class="text-center"> ${message}</h3>
+        </div>
+    </c:if>
+
+
     <c:if test="${empty cartLines}">
 
         <div class="jumbotron">
@@ -21,39 +29,51 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td data-th="Product">
-                    <div class="row">
-                        <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
-                                                             class="img-responsive"/></div>
-                        <div class="col-sm-10">
-                            <h4 class="nomargin">Product 1</h4>
-                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur.
-                                Lorem ipsum dolor sit amet.</p>
+
+            <c:forEach items="${cartLines}" var="cartLine">
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="${images}/${cartLine.product.code}.jpg"
+                                                                 alt="${cartLine.product.name}"
+                                                                 class="img-responsive cartImg"/></div>
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">${cartLine.product.name}</h4>
+                                <c:if test="${!cartLine.available}">
+                                    <strong class="unavailable">Not Available</strong>
+                                </c:if>
+                                <p>Brand: ${cartLine.product.brand}</p>
+                                <p>Description: ${cartLine.product.description}</p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td data-th="Price">$1.99</td>
-                <td data-th="Quantity">
-                    <input type="number" class="form-control text-center" value="1">
-                </td>
-                <td data-th="Subtotal" class="text-center">1.99</td>
-                <td class="actions" data-th="">
-                    <button class="btn btn-info btn-sm"><span class="glyphicon glyphicon-refresh"></span></button>
-                    <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash-o"></span></button>
-                </td>
-            </tr>
+                    </td>
+                    <td data-th="Price">${cartLine.buyingPrice}</td>
+                    <td data-th="Quantity">
+                        <input type="number" id="count_${cartLine.id}" min="1" max="5" lass="form-control text-center"
+                               value="${cartLine.productCount}">
+                    </td>
+                    <td data-th="Subtotal" class="text-center">${cartLine.total}</td>
+                    <td class="actions" data-th="">
+                        <button type="button" name="refreshCart" value="${cartLine.id}" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                        <a href="${contextRoot}/cart/${cartLine.id}/delete" class="btn btn-danger btn-sm"><span
+                                class="glyphicon glyphicon-trash"></span></a>
+
+                    </td>
+                </tr>
+            </c:forEach>
+
             </tbody>
             <tfoot>
             <tr class="visible-xs">
-                <td class="text-center"><strong>Total 1.99</strong></td>
+                <td class="text-center"><strong>Total: ${userModel.cart.grandTotal}</strong></td>
             </tr>
             <tr>
                 <td><a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue
                     Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                <td class="hidden-xs text-center"><strong>Total ${userModel.cart.grandTotal}</strong></td>
                 <td><a href="#" class="btn btn-success btn-block">Checkout <span
                         class="glyphicon glyphicon-chevron-right"></span></a></td>
             </tr>

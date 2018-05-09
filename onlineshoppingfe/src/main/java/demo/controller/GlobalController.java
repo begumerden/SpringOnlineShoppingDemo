@@ -41,7 +41,7 @@ public class GlobalController {
                 userModel.setRole(user.getRole());
                 userModel.setFullName(String.format("%s-%s", user.getFirstName(), user.getLastName()));
                 if(user.getRole().equals(Constants.Roles.USER)){
-                    user.setCart(user.getCart());
+                    userModel.setCart(user.getCart());
                 }
 
                 httpSession.setAttribute("userModel",userModel);

@@ -62,7 +62,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 
     @Override
     public List<CartLine> list(int cartId) {
-        String query = "FROM CartLine WHERE cartId = :cartId";
+        String query = "FROM cart_line WHERE cartId = :cartId";
         return sessionFactory.getCurrentSession()
                              .createQuery(query)
                              .setParameter("cartId", cartId)
@@ -71,7 +71,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 
     @Override
     public List<CartLine> listAvailable(int cartId) {
-        String query = "FROM CartLine WHERE cartId = :cartId AND available = :available";
+        String query = "FROM cart_line WHERE cartId = :cartId AND available = :available";
         return sessionFactory.getCurrentSession()
                              .createQuery(query)
                              .setParameter("cartId", cartId)
@@ -81,7 +81,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 
     @Override
     public CartLine getByCardAndProduct(int cartId, int productId) {
-        String query = "FROM CartLine WHERE cartId = :cartId AND product.id = :productId";
+        String query = "FROM cart_line WHERE cartId = :cartId AND product.id = :productId";
         CartLine result = (CartLine) sessionFactory.getCurrentSession()
                                                    .createQuery(query)
                                                    .setParameter("cartId", cartId)
