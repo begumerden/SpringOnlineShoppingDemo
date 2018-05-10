@@ -50,14 +50,20 @@ public class CartLineDAOImpl implements CartLineDAO {
             sessionFactory.getCurrentSession().update(cartLine);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error occurred", e);
             return false;
         }
     }
 
     @Override
     public boolean delete(CartLine cartLine) {
-        return false;
+        try {
+            sessionFactory.getCurrentSession().delete(cartLine);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error occurred", e);
+            return false;
+        }
     }
 
     @Override

@@ -36,9 +36,6 @@ VALUES ('User', '', 'USER', true, '$2y$10$deuCqyNa.0.A.JzN4pNbs.eDvE6sA1hms4ZFyF
 INSERT INTO user_info /*psw:istanbul*/
 (first_name, last_name, role, enabled, password, email, contact_number)
 VALUES ('Turkey', 'Istanbul', 'SUPPLIER', true, '$2y$10$K6tOngf6NQaTdBti0bYdBurz5eXjr1.hSnVgKKpe7.gv7JA5AYY9W', 'turkey_istanbul@mail.com', '2222222222');
-INSERT INTO user_info
-(first_name, last_name, role, enabled, password, email, contact_number)
-VALUES ('Turkey', 'Izmir', 'SUPPLIER', true, '$2y$10$AgyaP772inlk3JFOyWiMT.6GkZxYYD/dZsDYoV/ROexKrpebedqcu', 'turkey-izmir@mail.com', '3333333333');
 
 
 ---------
