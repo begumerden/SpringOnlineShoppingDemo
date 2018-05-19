@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author: b.erden
@@ -42,6 +43,9 @@ public class PageController {
         mv.addObject("title", "Home");
         mv.addObject("categories", categoryDAO.list());
         mv.addObject("homePageClicked", true);
+
+        List<Product> productsByViewCount = productDAO.listProductsByViewCount();
+        mv.addObject("productsByViewCount",productsByViewCount);
 
         return mv;
     }
@@ -146,4 +150,5 @@ public class PageController {
 
         return "redirect:/login?logout";
     }
+
 }

@@ -87,4 +87,13 @@ public class ProductDAOImpl implements ProductDAO {
                 .setParameter("active", true)
                 .setParameter("categoryId", categoryId).list();
     }
+
+    @Override
+    public List<Product> listProductsByViewCount() {
+        String hql = "FROM Product WHERE active = :active ORDER BY views";
+        return sessionFactory.getCurrentSession().createQuery(hql)
+                .setParameter("active", true).list();
+    }
+
+
 }

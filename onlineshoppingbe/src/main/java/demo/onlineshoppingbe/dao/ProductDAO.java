@@ -18,4 +18,5 @@ public interface ProductDAO {
 
     List<Product> listActiveProducts();
     List<Product> listActiveProductsByCategory(int categoryId);
+    List<Product> listProductsByViewCount();
 }
