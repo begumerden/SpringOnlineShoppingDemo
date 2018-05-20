@@ -12,7 +12,7 @@
             <c:forEach items="${productsByViewCount}" var="productByViewCount">
                 <div class="item col-xs-4 col-lg-4">
                     <div class="thumbnail">
-                        <img class="group list-group-image"
+                        <img href="${contextRoot}/show/${productByViewCount.id}/product" class="group list-group-image"
                              src="${contextRoot}/resources/images/${productByViewCount.code}.jpg"
                              alt="${productByViewCount.name}"/>
                         <div class="caption">
